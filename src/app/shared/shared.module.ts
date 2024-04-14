@@ -8,6 +8,7 @@ import { TranslateModule, TranslateLoader, TranslateService, LangChangeEvent } f
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { LangDropdwonComponent } from './components/lang-dropdown/lang-dropdwon.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -26,6 +27,7 @@ const sharedComponents = [PageComponent, HeaderComponent, FooterComponent];
         deps: [HttpClient],
       },
     }),
+    LangDropdwonComponent
   ],
   declarations: [
     // components

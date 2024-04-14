@@ -1,0 +1,33 @@
+<div
+  ngbDropdown
+  #languageMenu="ngbDropdown"
+  placement="bottom-end"
+  class="inline-block"
+>
+  <div
+    ngbDropdownToggle
+    class="border-[1px] border-indigo-900 py-1 px-2 rounded cursor-pointer hover:bg-indigo-900 after:hidden"
+    [ngClass]="{ 'bg-indigo-900': languageMenu.isOpen() }"
+  >
+    <i class="fa-solid fa-globe"></i>
+  </div>
+  <div
+    ngbDropdownMenu
+    class="mt-2 ltr:right-0 rtl:left-0 border-gray-100 bg-white shadow min-w-fit w-36 text-sm"
+  >
+    @for (language of languages; track $index) {
+    <button
+      (click)="changeLanguage(language.code); languageMenu.close()"
+      [disabled]="translateService.currentLang === language.code"
+      class="text-start block w-full px-6 py-2"
+      [ngClass]="
+        translateService.currentLang === language.code
+          ? 'text-gray-400'
+          : 'hover:bg-gray-100'
+      "
+    >
+      {{ language.label | translate }}
+    </button>
+    }
+  </div>
+</div>
