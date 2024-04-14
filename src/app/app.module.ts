@@ -6,10 +6,12 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent, HomeComponent],
+  imports: [BrowserModule, SharedModule, AppRoutingModule],
   providers: [provideClientHydration()],
   bootstrap: [AppComponent],
 })
