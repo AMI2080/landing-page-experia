@@ -3,18 +3,38 @@ import { CommonModule } from '@angular/common';
 import { PageComponent } from './components/page/page.component';
 import { HeaderComponent } from './components/page/header/header.component';
 import { FooterComponent } from './components/page/footer/footer.component';
+import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 const sharedComponents = [PageComponent, HeaderComponent, FooterComponent];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'ar',
+      useDefaultLang: true,
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
+  ],
   declarations: [
     // components
     ...sharedComponents,
   ],
   exports: [
+    TranslateModule,
     // components
     ...sharedComponents,
   ],
+  providers: [provideHttpClient(withFetch())],
 })
 export class SharedModule {}
